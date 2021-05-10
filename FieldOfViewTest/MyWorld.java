@@ -16,8 +16,8 @@ public class MyWorld extends World
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(900,600, 1);
-        setPaintOrder(Square.class, FovOverlay.class);
+        super(1200,800, 1);
+        setPaintOrder(FpsDisplay.class, Square.class, FovOverlay.class);
         addObject(new FovOverlay(), getWidth()/2, getHeight()/2);
         //addObject(new Image(), getWidth()/2, getHeight()/2);
         GreenfootImage img = new GreenfootImage(1, 1);
@@ -25,6 +25,8 @@ public class MyWorld extends World
         img.fill();
         //setBackground(img);
         prepare();
+        FpsDisplay fpsDisplay = new FpsDisplay();
+        addObject(fpsDisplay, 20, 20);
     }
 
     public void act()

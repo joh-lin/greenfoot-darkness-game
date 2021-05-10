@@ -10,6 +10,7 @@ public class LightSource extends Actor
 {
     public float intensity;
     public boolean isGlobal = false;
+    public int angle = 362;
     
     public LightSource(float intensity)
     {
@@ -19,4 +20,8 @@ public class LightSource extends Actor
     public float getIntensity() { return this.intensity; }
 
     public void setIntensity(float intensity) { this.intensity = intensity; }
+    
+    public int getAngle() { return this.angle; }
+    
+    public void setAngle(int angle) {this.angle = angle; }
 }
