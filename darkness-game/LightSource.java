@@ -17,6 +17,7 @@ public class LightSource extends AdvancedActor
         this.intensity = intensity;
         this.color = color;
         this.angle = angle;
+        clearImage();
     }
     
     public void act()

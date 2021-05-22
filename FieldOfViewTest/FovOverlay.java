@@ -19,7 +19,7 @@ https://stackoverflow.com/questions/3838329/how-can-i-check-if-two-segments-inte
 public class FovOverlay extends Actor
 {
     private GreenfootImage image;
-    private int lightRes = 5;   // determines how many pixels to skip (bigger = faster) (default=4)
+    private int lightRes = 10;   // determines how many pixels to skip (bigger = faster) (default=4)
     private int pixelSkip = 1;  // default = 1 ; grid lines = 2
 
     private float lightMax = 25f;
@@ -85,7 +85,6 @@ public class FovOverlay extends Actor
                                 float angle = (float)Math.toDegrees(Math.atan2(y-lsy, x-lsx)) - ls.getRotation();
                                 while (angle > 180) { angle -= 360; }
                                 while (angle < -180) { angle += 360; }
-                                if (x == 100 && y == 100) { System.out.println(angle); }
                                 if (angle > -ls.getAngle()/2 && angle < ls.getAngle()/2) {
                                     float distance = (float)Math.sqrt(Math.pow(x-lsx, 2) + Math.pow(y-lsy, 2));
                                     strength += (1/Math.pow(distance*distanceModifier, lightFalloff))*(ls.getIntensity()/lightPos.length);

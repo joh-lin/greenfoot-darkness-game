@@ -59,7 +59,7 @@ public class MyWorld extends World
      */
     private void prepare()
     {
-        MouseLightSource mouseLightSource1 = new MouseLightSource(200);
+        MouseLightSource mouseLightSource1 = new MouseLightSource(400);
         addObject(mouseLightSource1, 0, 0);
     }
 }

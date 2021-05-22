@@ -12,7 +12,7 @@ public class AdvancedWorld extends World
 
     public AdvancedWorld()
     {
-        this(1000, 800);
+        this(600, 400);
     }
     
     public AdvancedWorld(int width, int height)
@@ -21,7 +21,18 @@ public class AdvancedWorld extends World
         camera = new Camera(this, 0, 0);
         addObject(camera, 0, 0);
         camera.centerInWorld();
-        super.setPaintOrder(Camera.class);
+        super.setPaintOrder(FpsDisplay.class, Camera.class);
+
+        prepare();
+    }
+
+    public void prepare()
+    {
+        FpsDisplay fpsDisplay = new FpsDisplay();
+        addObject(fpsDisplay, 50, 50);
+        Player player = new Player();
+        addObject(player, getWidth()/2, getHeight()/2);
+        camera.setFollow(player);
     }
     
     public void setPaintOrder(Class... classes){
@@ -33,7 +44,7 @@ public class AdvancedWorld extends World
         ArrayList<Actor> ordered = new ArrayList<>();
 
         //Add non-listed class objects
-        for(Actor current : getObjects(Actor.class)){
+        for(Actor current : getObjects(AdvancedActor.class)){
             if(paintOrder.contains(current.getClass())) continue;
             ordered.add(current);
         }
@@ -41,7 +52,7 @@ public class AdvancedWorld extends World
         //Add listed class objects in reverse to paint the highest last
         for(int i=paintOrder.size()-1; i>=0; i--){
             objectLoop:
-            for(Actor current : getObjects(Actor.class)) {
+            for(Actor current : getObjects(AdvancedActor.class)) {
                 if(current.getClass() != paintOrder.get(i)) continue objectLoop;
                 ordered.add(current);
             }

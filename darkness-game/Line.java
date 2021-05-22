@@ -20,9 +20,14 @@ public class Line
         Point b = this.b;
         Point c = line2.a;
         Point d = line2.b;
-        if (ccw(a, c, d) != ccw(b, c, d) && ccw(a, b, c) != ccw(a, b, d)) {
-            return true;
-        }
-        return false;
+        return (ccw(a, c, d) != ccw(b, c, d) && ccw(a, b, c) != ccw(a, b, d));
+    }
+
+    public Line getScreenPos(Camera cam)
+    {
+        return new Line(
+            this.a.getScreenPos(cam),
+            this.b.getScreenPos(cam)
+        );
     }
 }
