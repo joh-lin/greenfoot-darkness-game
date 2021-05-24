@@ -5,7 +5,7 @@ import java.util.*;
 public class AdvancedWorld extends World
 {
     // Camera
-    private Camera camera;
+    public Camera camera;
     private FpsDisplay fpsDisplay;
 
     ArrayList<Class> paintOrder = new ArrayList<>();
@@ -26,31 +26,6 @@ public class AdvancedWorld extends World
         fpsDisplay = new FpsDisplay();
         fpsDisplay.visible = true;
         addObject(fpsDisplay, 50, 50);
-
-        prepare();
-    }
-
-    public void prepare()
-    {
-        Player player = new Player();
-        addObject(player, getWidth()/2, getHeight()/2);
-        camera.setFollow(player);
-        
-        
-        int cx = getWidth()/2;
-        int cy = getHeight()/2;
-        Square square1 = new Square(20, 20);
-        Square square2 = new Square(20, 20);
-        Square square3 = new Square(20, 20);
-        addObject(square1, cx, cy-120);
-        addObject(square2, cx-120, cy+110);
-        addObject(square3, cx+120, cy+110);
-        LightSource ls1 = new LightSource(50f, 1, 0, 0);
-        LightSource ls2 = new LightSource(50f, 0, 1, 0);
-        LightSource ls3 = new LightSource(50f, 0, 0, 1);
-        addObject(ls1, cx+120, cy-110);
-        addObject(ls2, cx-120, cy-110);
-        addObject(ls3, cx, cy+120);
     }
     
     public void setPaintOrder(Class... classes){

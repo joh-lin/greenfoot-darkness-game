@@ -21,12 +21,6 @@ public class Camera extends Actor
     public float followStrength = 0.1f; //(0.001 - 1  , smaller = slower)
 
     public List<Line> geometry;
-    
-    public boolean smoothShadows = false;
-    public float smoothingRadius = 5;
-    public int lightRes = 1;
-    public float lightFalloff = 0.8f;
-    public float lightModifier = 0.1f;
 
 
     public Camera(AdvancedWorld world, int posx, int posy)

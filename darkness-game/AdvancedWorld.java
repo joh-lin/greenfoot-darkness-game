@@ -12,7 +12,7 @@ public class AdvancedWorld extends World
 
     public AdvancedWorld()
     {
-        this(600, 400);
+        this(1000, 800);
     }
     
     public AdvancedWorld(int width, int height)

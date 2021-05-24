@@ -15,12 +15,12 @@ public class Player extends AdvancedActor
     
     public void addedToWorld(World world)
     {
-        //LightSource lightSource = new LightSource(0.5f, 1000);
-        //world.addObject(lightSource, 0, 0);
-        //lightSource.setFollow(this);
-        Square s = new Square(20, 20);
-        world.addObject(s, 0, 0);
-        s.setFollow(this);
+        LightSource lightSource = new LightSource(50);
+        world.addObject(lightSource, 0, 0);
+        lightSource.setFollow(this);
+        //Square s = new Square(20, 20);
+        //world.addObject(s, 0, 0);
+        //s.setFollow(this);
     }
     
 
