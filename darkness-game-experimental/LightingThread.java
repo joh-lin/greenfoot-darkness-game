@@ -130,13 +130,6 @@ private List<Point> castAllRays(List<Float> angles, List<Line> geometry, LightSo
         for (int i = 0; i < xPoints.length; i++) {
             camImg.setColor(Color.BLUE);
             camImg.drawLine(xPoints[i], yPoints[i], ls.getScreenX(cam), ls.getScreenY(cam));
-            camImg.setColor(Color.GREEN);
-            if (i==0) {
-                camImg.drawLine(xPoints[i], yPoints[i], xPoints[xPoints.length-1], yPoints[yPoints.length-1]);
-            } else {
-                camImg.drawLine(xPoints[i], yPoints[i], xPoints[i-1], yPoints[i-1]);
-            }
-            camImg.setColor(Color.RED);
             camImg.fillOval(xPoints[i]-debugCircleSize/2, yPoints[i]-debugCircleSize/2, debugCircleSize, debugCircleSize);
         }
     }

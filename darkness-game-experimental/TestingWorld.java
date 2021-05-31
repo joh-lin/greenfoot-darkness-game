@@ -46,10 +46,10 @@ public class TestingWorld extends AdvancedWorld
         Square square11 = new Square(40, 40);
         addObject(square11, cx+120, cy-1000);
         LightSource ls4 = new LightSource(30, 1, 0, 0);
-        ls4.setRadius(20);
         addObject(ls4, cx+250, cy-1190);
         LightSource ls5 = new LightSource(30, 1, 0, 0);
-        ls5.setRadius(20);
         addObject(ls5, cx-250, cy-600);
+        LightSource ls6 = new LightSource(50);
+        addObject(ls6, cx, cy + 700);
     }
 }

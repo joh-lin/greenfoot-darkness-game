@@ -4,6 +4,9 @@ import java.lang.Math;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
+import java.awt.MultipleGradientPaint.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import packages.*;
 
 
@@ -122,13 +125,14 @@ public class Camera extends Actor
                 LightSource ls = lightSources.get(i);
                 java.awt.Color[] colors = {
                     new java.awt.Color(
-                        ls.color[0]*ls.intensity/100, 
-                        ls.color[1]*ls.intensity/100, 
-                        ls.color[2]*ls.intensity/100), 
+                        ls.color[0]*ls.intensity*0.01f, 
+                        ls.color[1]*ls.intensity*0.01f, 
+                        ls.color[2]*ls.intensity*0.01f),
                     java.awt.Color.BLACK};
                 float[] dist = {0.0f, 1.0f};
                 float radius = ls.radius*ls.intensity;
-                RadialGradientPaint paint = new RadialGradientPaint(ls.getScreenX(this), ls.getScreenY(this), radius, dist, colors);
+                Point2D center = new Point2D.Float(ls.getScreenX(this), ls.getScreenY(this));
+                RadialGradientPaint paint = new RadialGradientPaint(center, radius, dist, colors);
                 lightImgG.setPaint(paint);
                 lightImgG.fillPolygon(lt.xPoints, lt.yPoints, lt.xPoints.length);
             } catch (InterruptedException e) {

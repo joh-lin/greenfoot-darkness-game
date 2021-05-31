@@ -19,7 +19,7 @@ public class LightSource extends AdvancedActor
         this.color[0] = r;
         this.color[1] = g;
         this.color[2] = b; 
-        clearImage();
+        //clearImage();
     }
 
     public void setAngle(int angle) {
