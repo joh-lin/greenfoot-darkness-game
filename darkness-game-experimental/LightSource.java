@@ -5,7 +5,7 @@ public class LightSource extends AdvancedActor
 {
     public float intensity;
     public float[] color = {0.0f, 0.0f, 0.0f};
-    public int angle = 261;
+    public int angle = 361;
     public float radius = 10;
 
     public LightSource(float intensity)

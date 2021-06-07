@@ -144,12 +144,12 @@ public class Camera extends Actor
         BufferedImage img = getImage().getAwtImage();
         Graphics2D imgG = img.createGraphics();
         imgG.setComposite(BlendComposite.Multiply);
-        imgG.drawImage(lightImageB, 0, 0, null);
+        if (!debugMode) imgG.drawImage(lightImageB, 0, 0, null);
     }
 
     public void updateGeometry()
     {
-        int offset = -1000;
+        int offset = -5000;
         geometry = new ArrayList<>();
         List<GeometryObject> objects = world.getObjects(GeometryObject.class);
         for (int i = 0; i < objects.size(); i++) {

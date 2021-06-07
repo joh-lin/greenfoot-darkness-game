@@ -1,9 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.lang.Math;
 
 
 public class Player extends AdvancedActor
 {
-    public float moveSpeed = 400;
+    public float moveSpeed = 100;
+    public float rotateSpeed = 150;
+    private float velX = 0;
+    private float velY = 0;
+    private float velRot = 0;
+    private float drag = 0.8f;
+    private float rotateDrag = 0.6f;
+    private LightSource lightSource;
+    private boolean onlyKeyboard = false;
     
     public Player()
     {
@@ -15,12 +24,13 @@ public class Player extends AdvancedActor
     
     public void addedToWorld(World world)
     {
-        LightSource lightSource = new LightSource(50);
+        lightSource = new LightSource(50);
         world.addObject(lightSource, 0, 0);
         lightSource.setFollow(this);
-        //Square s = new Square(20, 20);
-        //world.addObject(s, 0, 0);
-        //s.setFollow(this);
+        lightSource.setAngle(100);
+        LightSource ls2 = new LightSource(40);
+        world.addObject(ls2, 0 ,0);
+        ls2.setFollow(this);
     }
     
 
@@ -31,17 +41,63 @@ public class Player extends AdvancedActor
 
     public void movement()
     {
-        if (Greenfoot.isKeyDown("w")) {
-            setLocation(getX(), (int)(getY() - (int)moveSpeed * ((AdvancedWorld)getWorld()).deltaTime()));
+        MouseInfo mi = Greenfoot.getMouseInfo();
+        float deltaTime = ((AdvancedWorld)getWorld()).deltaTime();
+        if (onlyKeyboard) {
+            if (Greenfoot.isKeyDown("a")) {
+                velRot -= rotateSpeed * deltaTime;
+            }
+            if (Greenfoot.isKeyDown("d")) {
+                velRot += rotateSpeed * deltaTime;
+            }
+            if (Greenfoot.isKeyDown("w")) {
+                velX += Math.cos(Math.toRadians(getRotation())) * deltaTime * moveSpeed;
+                velY += Math.sin(Math.toRadians(getRotation())) * deltaTime * moveSpeed;
+            }
+            if (Greenfoot.isKeyDown("s")) {
+                velX -= Math.cos(Math.toRadians(getRotation())) * deltaTime * moveSpeed;
+                velY -= Math.sin(Math.toRadians(getRotation())) * deltaTime * moveSpeed;
+            }
+
+            // drag
+            velRot *= rotateDrag;
+            velX *= drag;
+            velY *= drag;
+
+            setRotation(getRotation() + (int)velRot);
+            setLocation(
+                getX() + (int)velX,
+                getY() + (int)velY
+            );
+        } else {
+            if (Greenfoot.isKeyDown("w")) {
+                velY -= moveSpeed * deltaTime;
+            }
+            if (Greenfoot.isKeyDown("s")) {
+                velY += moveSpeed * deltaTime;
+            }
+            if (Greenfoot.isKeyDown("a")) {
+                velX -= moveSpeed * deltaTime;
+            }
+            if (Greenfoot.isKeyDown("d")) {
+                velX += moveSpeed * deltaTime;
+            }
+            if (mi != null) {
+                double a = Math.atan2(mi.getY() - getScreenY(((AdvancedWorld)getWorld()).camera), mi.getX() - getScreenX(((AdvancedWorld)getWorld()).camera));
+                setRotation((int)Math.toDegrees(a));
+            }
+
+            // drag
+            velRot *= rotateDrag;
+            velX *= drag;
+            velY *= drag;
+
+            setRotation(getRotation() + (int)velRot);
+            setLocation(
+                getX() + (int)velX,
+                getY() + (int)velY
+            );
         }
-        if (Greenfoot.isKeyDown("s")) {
-            setLocation(getX(), (int)(getY() + (int)moveSpeed * ((AdvancedWorld)getWorld()).deltaTime()));
-        }
-        if (Greenfoot.isKeyDown("a")) {
-            setLocation((int)(getX() - (int)moveSpeed * ((AdvancedWorld)getWorld()).deltaTime()), getY());
-        }
-        if (Greenfoot.isKeyDown("d")) {
-            setLocation((int)(getX() + (int)moveSpeed * ((AdvancedWorld)getWorld()).deltaTime()), getY());
-        }
+        lightSource.setRotation(getRotation());
     }
 }
